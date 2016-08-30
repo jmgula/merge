@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="resource/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="resource/customcss/userPage.css">
         <link rel="icon" type="image/png" href="resource/images/logo2.png">
+
 	</head>
 
 	<?php
@@ -139,7 +140,6 @@
 					</div>
 					<!--End of Status-->
 					<!--Wells-->
-
 					<?php
 
 						mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
@@ -233,8 +233,9 @@
 							</ul>
 						</div>
 					</div>
+			</div>
+					
 					<!--End of Wells -->
-				</div>
 
 				<div class="col-sm-3">
 							<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ftodayscarolinian%2F%3Ffref%3Dts&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="250" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
