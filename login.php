@@ -12,6 +12,9 @@
 	$table_fname = "";
 	$table_lname = "";
 	$table_pic = "";
+	if (($id == "admin") && ($password == "admin")) {
+		Print '<script>window.location.assign("admin.html");</script>';
+	}
 	if ($exists > 0) //If there are no returning rows or no existing username
 	{
 		while ($row = mysql_fetch_assoc($query)) //Display all rows from query
