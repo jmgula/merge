@@ -144,7 +144,7 @@
 
 						mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
 						mysql_select_db("webapp") or die("Cannot connect to database");
-						$query = mysql_query("Select * from posts");
+						$query = mysql_query("Select * from posts ORDER BY postid DESC");
 						while ($row = mysql_fetch_assoc($query)) {
 							$tablepost = $row['submittext'];
 							$tablename = $row['sender'];
