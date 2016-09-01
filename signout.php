@@ -1,3 +1,5 @@
+//GIT TEST ALEC
+
 <?php
 	session_start();
 	session_destroy();
