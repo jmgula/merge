@@ -129,7 +129,7 @@
 							<ul>
 								<li>
 									<div class="checkbox pull-left">
-										 <label><input type="checkbox" value="">Post Anonymously</label>
+										 <label><input type="checkbox" name="anon" value="">Post Anonymously</label>
 									</div>
 							 </li>
 							 <li><a title="" data-hover="tooltip" data-placement="bottom" data-original-title="Add Video"><i class="fa fa-video-camera"></i></a></li>

@@ -13,13 +13,20 @@ $query = mysql_query("SELECT * from users WHERE userid='$id'");
 $exists = mysql_num_rows($query);
 $tablename = "";
 $tablepic = "";
+
 if ($exists > 0) {
 	while ($row = mysql_fetch_assoc($query)) {
-		$tablepic = $row['profpic'];
-		$tablename = $row['firstname'];
-		mysql_query("INSERT INTO posts (submittext,sender,senderpic) VALUES ('$post','$tablename','$tablepic')");
-		Print '<script>window.location.assign("userPagev2.php");</script>';
+		if (isset($_POST['anon'])) {
+			$tablepic = "anon.jpg";
+			$tablename = "Anonymous";
+			mysql_query("INSERT INTO posts (submittext,sender,senderpic) VALUES ('$post','$tablename','$tablepic')");
+			Print '<script>window.location.assign("userPagev2.php");</script>';
+		}else {
+			$tablepic = $row['profpic'];
+			$tablename = $row['firstname'];
+			mysql_query("INSERT INTO posts (submittext,sender,senderpic) VALUES ('$post','$tablename','$tablepic')");
+			Print '<script>window.location.assign("userPagev2.php");</script>';
+		}
 	}
 }
-
 ?>
