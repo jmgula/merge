@@ -24,7 +24,7 @@
 		$fname = $_SESSION['userfname'];
 		$lname = $_SESSION['userlname'];
 		$pic = $_SESSION['profpic'];
-		$password = $_SESSION['pass'];s
+		$password = $_SESSION['pass'];
 		$tablepostid = $_SESSION['postid'];
 	?>
 

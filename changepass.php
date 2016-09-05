@@ -18,7 +18,7 @@ if ($exists > 0) {
 	}
 	if ($oldpass == $table_pass) {
 		if ($newpass == $confpass) {
-			if ((preg_match('/\s/',$newpass)) && (preg_match('/\s/', $oldpass))) {
+			if (preg_match('/\s/',$newpass) or preg_match('/\s/',$confpass)) {
 				Print '<script>alert("New password must not contain white space(s)");</script>';
 				Print '<script>window.location.assign("userPagev2.php");</script>';
 			}else {
