@@ -16,18 +16,22 @@ if ($exists > 0) {
 	while ($row = mysql_fetch_assoc($query)) {
 		$table_pass = $row['password'];
 	}
-	if ($table_pass != $oldpass) {
-		Print '<script>alert("Incorrect password");</script>';
-		Print '<script>window.location.assign("userPagev2.php");</script>';
-	}
-	if ($newpass != $confpass) {
-	Print '<script>alert("New passwords do not match");</script>';
-	Print '<script>window.location.assign("userPagev2.php");</script>';
-	}
-	if (($table_pass == $oldpass) && ($newpass == $confpass)) {
-		mysql_query("UPDATE users SET password='$confpass' WHERE userid='$id'");
-		$_SESSION['pass'] = $confpass;
-		Print '<script>alert("Password change successful");</script>';
+	if ($oldpass == $table_pass) {
+		if ($newpass == $confpass) {
+			if ((preg_match('/\s/',$newpass)) && (preg_match('/\s/', $oldpass))) {
+				Print '<script>alert("New password must not contain white space(s)");</script>';
+				Print '<script>window.location.assign("userPagev2.php");</script>';
+			}else {
+			mysql_query("UPDATE users SET password='$newpass' WHERE userid='$id'");
+			Print '<script>alert("Password changed!");</script>';
+			Print '<script>window.location.assign("userPagev2.php");</script>';
+			}
+		}else{
+			Print '<script>alert("New passwords do not match");</script>';
+			Print '<script>window.location.assign("userPagev2.php");</script>';
+		}
+	}else {
+		Print '<script>alert("Old password is incorrect!");</script>';
 		Print '<script>window.location.assign("userPagev2.php");</script>';
 	}
 }

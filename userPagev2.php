@@ -24,7 +24,8 @@
 		$fname = $_SESSION['userfname'];
 		$lname = $_SESSION['userlname'];
 		$pic = $_SESSION['profpic'];
-		$password = $_SESSION['pass'];
+		$password = $_SESSION['pass'];s
+		$tablepostid = $_SESSION['postid'];
 	?>
 
 	
@@ -132,8 +133,6 @@
 										 <label><input type="checkbox" name="anon" value="">Post Anonymously</label>
 									</div>
 							 </li>
-							 <li><a title="" data-hover="tooltip" data-placement="bottom" data-original-title="Add Video"><i class="fa fa-video-camera"></i></a></li>
-							 <li><a title="" data-hover="tooltip" data-placement="bottom" data-original-title="Add Picture"><i class="fa fa-picture-o"></i></a></li>
 							</ul>
 							<button type="submit" class="btn btn-success pull-right"><i class="glyphicon glyphicon-pencil"></i> Share</button>
 						</form>
@@ -145,12 +144,40 @@
 						mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
 						mysql_select_db("webapp") or die("Cannot connect to database");
 						$query = mysql_query("Select * from posts ORDER BY postid DESC");
+
+						$query2 =mysql_query("SELECT * FROM posts");
+						$exists = mysql_num_rows($query);
+
 						while ($row = mysql_fetch_assoc($query)) {
 							$tablepost = $row['submittext'];
 							$tablename = $row['sender'];
 							$tablepic = $row['senderpic'];
 							$timestamp = $row['hrs'];
+							$tablepostid = $row['userpostid'];
 
+							if ($id == $tablepostid) {
+								Print ' 
+									<div class="well">
+									<div class="media">
+										<a class="pull-left" href="#"><img class="media-object" src="resource/images/'; Print $tablepic; Print '"></a>
+										<div class="media-body">
+											<a href="#"><strong>'; Print $tablename; Print '</strong></a><span class="time">'; echo " ";echo date('m/d/Y', strtotime($timestamp));  Print '</span><br>';
+											Print $tablepost;
+										Print '
+										</div>
+										<ul class="list-inline list-unstyled interact-sec">
+												<li><a href="#viewComments" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="View Comments"><span class="fa fa-comments"></span></a></li>
+												<li>|</li>
+												<li><a href="#edit" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Edit"><span class="fa fa-pencil"></span></a></li>
+												<li>|</li>
+												<li><a href="#report" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
+												<li>|</li>
+												<li><a href="#delete" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Delete"><span class="fa fa-times"></span></a></li>
+										</ul>
+									</div>
+									</div>
+								';
+							}else{
 							Print ' 
 									<div class="well">
 									<div class="media">
@@ -169,77 +196,17 @@
 									</div>
 								';
 							}
+							}
 					?>
 
-					<div class="well">
-						<div class="media">
-							<a class="pull-left" href="#"><img class="media-object" src="resource/images/kristopher.jpg"></a>
-							<div class="media-body">
-								<a href="#"><strong>Kristopher Cabahug</strong></a><span class="time"> 11hr</span>
-								<p>I love my life.</p>
-							</div>
-							<ul class="list-inline list-unstyled interact-sec">
-									<li><a href="#viewComments" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="View Comments"><span class="fa fa-comments"></span></a></li>
-									<li>|</li>
-									<li><a href="#report" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
-							</ul>
-						</div>
-					</div>
-					<!--End of Wells -->
-					<!--Wells-->
-					<div class="well">
-						<div class="media">
-							<a class="pull-left" href="#"><img class="media-object" src="resource/images/alec2.jpg"></a>
-							<div class="media-body">
-								<a href="#"><strong>Alec Melchor</strong></a><span class="time"> 12hr</span>
-								<p>Chixboy man ko.</p>
-							</div>
-							<ul class="list-inline list-unstyled interact-sec">
-									<li><a href="#" data-toggle="modal" rel="tooltip" data-placement="bottom" data-original-title="View Comments"><span class="fa fa-comments"></span></a></li>
-									<li>|</li>
-									<li><a href="#" data-toggle="modal" rel="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
-							</ul>
-						</div>
-					</div>
-					<!--End of Wells -->
-					<!--Wells-->
-					<div class="well">
-						<div class="media">
-							<a class="pull-left" href="#"><img class="media-object" src="resource/images/jm.jpg"></a>
-							<div class="media-body">
-								<a href="#"><strong>JM Gula</strong></a><span class="time"> 12hr</span>
-								<p>Gwapo ko.</p>
-							</div>
-							<ul class="list-inline list-unstyled interact-sec">
-									<li><a href="#" data-toggle="tooltip" data-placement="bottom" data-original-title="View Comments"><span class="fa fa-comments"></span></a></li>
-									<li>|</li>
-									<li><a href="#" data-toggle="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
-							</ul>
-						</div>
-					</div>
-					<!--End of Wells -->
-					<!--Wells-->
-					<div class="well">
-						<div class="media">
-							<a class="pull-left" href="#"><img class="media-object" src="resource/images/Zam.png"></a>
-							<div class="media-body">
-								<a href="#"><strong>Zammy Serato</strong></a><span class="time"> 13hr</span>
-								<p>Nindota sa akong adlaw karon :).</p>
-							</div>
-							<ul class="list-inline list-unstyled interact-sec">
-									<li><a href="#" data-toggle="tooltip" data-placement="bottom" data-original-title="View Comments"><span class="fa fa-comments"></span></a></li>
-									<li>|</li>
-									<li><a href="#" data-toggle="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
-							</ul>
-						</div>
-					</div>
+					
 			</div>
 					
 					<!--End of Wells -->
 
 				<div class="col-sm-3">
 							<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ftodayscarolinian%2F%3Ffref%3Dts&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="250" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-							<iframe class="marg" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fwarriorsturf%2F%3Ffref%3Dts&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="300" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+							<iframe class="marg" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fwarriorsturf%2F%3Ffref%3Dts&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=truse&hide_cover=false&show_facepile=true&appId" width="340" height="300" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 				</div>
 			</div>
 		</div>
@@ -310,6 +277,20 @@
 			</div>
 		</div>
 
+		<div class="modal" id="delete" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-body" style="text-align:center;"><h4>Delete this post?</h4></div>
+					<div class="modal-footer">
+						<form method="post" action="deletepost.php">
+						<button type="submit" class="btn btn-success">OK</button>
+						</form>
+						<button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="modal" id="changePass" role="dialog">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
@@ -329,6 +310,24 @@
 								<input type="password" name="confnewpass" id="pwd" class="form-control" required="required">
 							</div>
 							<button type="submit" class="btn btn-success btn-sm">Change Password</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal" id="edit" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header"><h4><b>Edit Post</b></h4></div>
+					<div class="modal-body" style="padding:10px;">
+						<form action="" method="POST">
+							<textarea style="width:100%; resize:none;"></textarea>
+							
+						
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success btn-sm">Save</button>
 						</form>
 					</div>
 				</div>
