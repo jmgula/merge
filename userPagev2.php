@@ -284,8 +284,8 @@
 					<div class="modal-footer">
 						<form method="post" action="deletepost.php">
 						<button type="submit" class="btn btn-success">OK</button>
-						</form>
 						<button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+						</form>
 					</div>
 				</div>
 			</div>

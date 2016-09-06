@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2016 at 10:24 AM
+-- Generation Time: Sep 06, 2016 at 10:29 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -31,20 +31,10 @@ CREATE TABLE `posts` (
   `userpost` int(11) DEFAULT NULL,
   `submittext` varchar(255) DEFAULT NULL,
   `sender` varchar(255) NOT NULL,
-  `senderpic` varchar(255) NOT NULL
+  `senderpic` varchar(255) NOT NULL,
+  `hrs` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `userpostid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`postid`, `userpost`, `submittext`, `sender`, `senderpic`) VALUES
-(31, NULL, '12', 'Alec Job', 'Alec.jpg'),
-(32, NULL, 'asdfagafdsgs', 'Alec Job', 'Alec.jpg'),
-(33, NULL, 'sdfaf', 'Alec Job', 'Alec.jpg'),
-(34, NULL, '4', 'Alec Job', 'Alec.jpg'),
-(35, NULL, 'gdafag', 'Alec Job', 'Alec.jpg'),
-(36, NULL, 'gwapa akng uyab\r\n', 'Alec Job', 'Alec.jpg');
 
 -- --------------------------------------------------------
 
@@ -96,7 +86,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `postid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `users`
 --

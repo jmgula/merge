@@ -18,10 +18,15 @@ if ($exists > 0) {
 	}
 	if ($oldpass == $table_pass) {
 		if ($newpass == $confpass) {
-			if (preg_match('/\s/',$newpass) or preg_match('/\s/',$confpass)) {
-				Print '<script>alert("New password must not contain white space(s)");</script>';
+			if (preg_match('/\s/',$newpass) or preg_match('/\s/',$confpass) or preg_match('/\s/', $oldpass)) {
+				Print '<script>alert("Passwords must not contain white space(s)");</script>';
 				Print '<script>window.location.assign("userPagev2.php");</script>';
-			}else {
+			}
+			elseif (($table_pass == $oldpass) && ($table_pass == $newpass) && ($table_pass == $confpass)) {
+				Print '<script>alert("Old and new password are the same");</script>';
+				Print '<script>window.location.assign("userPagev2.php");</script>';
+			}
+			else {
 			mysql_query("UPDATE users SET password='$newpass' WHERE userid='$id'");
 			Print '<script>alert("Password changed!");</script>';
 			Print '<script>window.location.assign("userPagev2.php");</script>';
