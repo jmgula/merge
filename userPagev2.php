@@ -204,7 +204,7 @@
 					<script>
 						function myFunction(id)
 						{
-						var r=confirm("Are you sure you want to delete this record?");
+						var r=confirm("Are you sure you want to delete this post?");
 						if (r==true)
 						  {
 						  	window.location.assign("deletepost.php?id=" + id);
