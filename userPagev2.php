@@ -172,7 +172,7 @@
 												<li>|</li>
 												<li><a href="#report" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
 												<li>|</li>
-												<li><a href="#delete" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Delete"><span class="fa fa-times"></span></a></li>
+												<li><a href="#delete" onclick="myFunction('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="Delete"><span class="fa fa-times"></span></a></li>
 										</ul>
 									</div>
 									</div>
@@ -198,9 +198,19 @@
 							}
 							}
 					?>
-
 					
 			</div>
+
+					<script>
+						function myFunction(id)
+						{
+						var r=confirm("Are you sure you want to delete this record?");
+						if (r==true)
+						  {
+						  	window.location.assign("deletepost.php?id=" + id);
+						  }
+						}
+					</script>
 					
 					<!--End of Wells -->
 
