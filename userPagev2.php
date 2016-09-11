@@ -170,9 +170,9 @@
 												<li>|</li>
 												<li><a href="#edit" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Edit"><span class="fa fa-pencil"></span></a></li>
 												<li>|</li>
-												<li><a href="#report" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
+												<li><a href="#report" onclick="report('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
 												<li>|</li>
-												<li><a href="#delete" onclick="myFunction('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="Delete"><span class="fa fa-times"></span></a></li>
+												<li><a href="#delete" onclick="deletepost('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="Delete"><span class="fa fa-times"></span></a></li>
 										</ul>
 									</div>
 									</div>
@@ -190,7 +190,7 @@
 										<ul class="list-inline list-unstyled interact-sec">
 												<li><a href="#viewComments" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="View Comments"><span class="fa fa-comments"></span></a></li>
 												<li>|</li>
-												<li><a href="#report" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
+												<li><a href="#report" onclick="report('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
 										</ul>
 									</div>
 									</div>
@@ -202,12 +202,21 @@
 			</div>
 
 					<script>
-						function myFunction(id)
+						function deletepost(id)
 						{
 						var r=confirm("Are you sure you want to delete this post?");
 						if (r==true)
 						  {
 						  	window.location.assign("deletepost.php?id=" + id);
+						  }
+						}
+
+						function report(id)
+						{
+						var r=confirm("Are you sure you want to report this post?");
+						if (r==true)
+						  {
+						  	window.location.assign("report.php?id=" + id);
 						  }
 						}
 					</script>
