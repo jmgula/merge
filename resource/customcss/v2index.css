@@ -111,3 +111,8 @@ footer{
 .social:hover{
   cursor: pointer;
 }
+
+.schools:hover{
+  cursor: pointer;
+  color: #AFB428;
+}
