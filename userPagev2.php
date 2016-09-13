@@ -166,7 +166,7 @@
 										<ul class="list-inline list-unstyled interact-sec">
 												<li><a href="#viewComments" onclick="viewcomm('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="View Comments"><span class="fa fa-comments"></span></a></li>
 												<li>|</li>
-												<li><a href="#edit" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Edit"><span class="fa fa-pencil"></span></a></li>
+												<li><a href="editpost.php?postid='.$row['postid'].'" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Edit"><span class="fa fa-pencil"></span></a></li>
 												<li>|</li>
 												<li><a href="#report" onclick="report('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
 												<li>|</li>
