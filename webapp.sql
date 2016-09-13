@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2016 at 10:29 AM
+-- Generation Time: Sep 13, 2016 at 05:21 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -23,6 +23,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `commentid` int(11) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `profpic` varchar(32) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `postid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -33,7 +47,8 @@ CREATE TABLE `posts` (
   `sender` varchar(255) NOT NULL,
   `senderpic` varchar(255) NOT NULL,
   `hrs` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `userpostid` int(11) NOT NULL
+  `userpostid` int(11) NOT NULL,
+  `reports` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -66,6 +81,12 @@ INSERT INTO `users` (`userid`, `password`, `firstname`, `lastname`, `profpic`) V
 --
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`commentid`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -83,10 +104,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `commentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `postid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `users`
 --
