@@ -15,10 +15,10 @@
 
 	<?php
 		session_start(); //starts the session
-		if($_SESSION['userid']){ //checks if user is logged in
-		}
-		else{
-			header("location:indexv2.html"); // redirects if user is not logged in
+		if($_SERVER['REQUEST_METHOD'] == "GET")
+		{
+			$postid = $_GET['id'];
+			$_SESSION['postcommentid'] = $postid;
 		}
 		$id = $_SESSION['userid']; //assigns user value
 		$fname = $_SESSION['userfname'];
@@ -121,115 +121,59 @@
     					</div>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<!--Status-->
-					<div class="status-content">
-						<form action="submitpost.php" method="POST">
-							<textarea name="tfArea" rows="4" cols="40" id="status" placeholder="Share what you feel..." required="required"></textarea>
-							<ul>
-								<li>
-									<div class="checkbox pull-left">
-										 <label><input type="checkbox" name="anon" value="">Post Anonymously</label>
-									</div>
-							 </li>
-							</ul>
-							<button type="submit" class="btn btn-success pull-right"><i class="glyphicon glyphicon-pencil"></i> Share</button>
-						</form>
+			
+				<div class="col-sm-6" id="viewComments" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header"><h4><b>View Comments</b></h4></div>
+							<div class="modal-body">
+								<?php
+									mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
+									mysql_select_db("webapp") or die("Cannot connect to database");
+									$query = mysql_query("SELECT * FROM comments");
+
+									$exists = mysql_num_rows($query);
+
+									while ($row = mysql_fetch_assoc($query)) {
+										$tableid = $row['commentid'];
+										$tablecomment = $row['comment'];
+										$tablepic = $row['profpic'];
+										$tablename = $row['name'];
+										$tablepostid = $row['postid'];
+
+
+										if ($postid == $tablepostid) {
+											Print ' 
+												<div class="well">
+												<div class="media">
+													<a class="pull-left" href="#"><img class="media-object" src="resource/images/'; Print $tablepic; Print '"></a>
+													<div class="media-body">
+														<a href="#"><strong>'; Print $tablename; Print '</strong></a><br>';
+														Print $tablecomment;
+														Print '
+														</div>
+														</div>
+														</div>
+												';
+										}
+									}
+								?>
+
+							</div>
+							<div class="modal-footer">
+								<form action="comment.php" method="POST" class="form-inline">
+									<input type="text" name="comm" class="pull-left" required="required" placeholder="Write a comment..." style="width:80%;padding:5px;">
+									<button type="Submit" class="btn btn-success">Comment</button>
+								</form>
+							</div>
+						</div>
 					</div>
-					<!--End of Status-->
-					<!--Wells-->
-					<?php
-
-						mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
-						mysql_select_db("webapp") or die("Cannot connect to database");
-						$query = mysql_query("Select * from posts ORDER BY postid DESC");
-
-						$exists = mysql_num_rows($query);
-
-						while ($row = mysql_fetch_assoc($query)) {
-							$tablepost = $row['submittext'];
-							$tablename = $row['sender'];
-							$tablepic = $row['senderpic'];
-							$timestamp = $row['hrs'];
-							$tablepostid = $row['userpostid'];
-
-							if ($id == $tablepostid) {
-								Print ' 
-									<div class="well">
-									<div class="media">
-										<a class="pull-left" href="#"><img class="media-object" src="resource/images/'; Print $tablepic; Print '"></a>
-										<div class="media-body">
-											<a href="#"><strong>'; Print $tablename; Print '</strong></a><span class="time">'; echo " ";echo date('m/d/Y', strtotime($timestamp));  Print '</span><br>';
-											Print $tablepost;
-										Print '
-										</div>
-										<ul class="list-inline list-unstyled interact-sec">
-												<li><a href="#viewComments" onclick="viewcomm('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="View Comments"><span class="fa fa-comments"></span></a></li>
-												<li>|</li>
-												<li><a href="#edit" data-toggle="modal" data-hover="tooltip" data-placement="bottom" data-original-title="Edit"><span class="fa fa-pencil"></span></a></li>
-												<li>|</li>
-												<li><a href="#report" onclick="report('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
-												<li>|</li>
-												<li><a href="#delete" onclick="deletepost('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="Delete"><span class="fa fa-times"></span></a></li>
-										</ul>
-									</div>
-									</div>
-								';
-							}else{
-							Print ' 
-									<div class="well">
-									<div class="media">
-										<a class="pull-left" href="#"><img class="media-object" src="resource/images/'; Print $tablepic; Print '"></a>
-										<div class="media-body">
-											<a href="#"><strong>'; Print $tablename; Print '</strong></a><span class="time">'; echo " ";echo date('m/d/Y', strtotime($timestamp));  Print '</span><br>';
-											Print $tablepost;
-										Print '
-										</div>
-										<ul class="list-inline list-unstyled interact-sec">
-												<li><a href="#viewComments" onclick="viewcomm('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="View Comments"><span class="fa fa-comments"></span></a></li>
-												<li>|</li>
-												<li><a href="#report" onclick="report('.$row['postid'].')" data-hover="tooltip" data-placement="bottom" data-original-title="Report"><span class="fa fa-exclamation-triangle"></span></a></li>
-										</ul>
-									</div>
-									</div>
-								';
-							}
-							}
-					?>
+				</div>
 					
-			</div>
-
-					<script>
-						function deletepost(id)
-						{
-						var r=confirm("Are you sure you want to delete this post?");
-						if (r==true)
-						  {
-						  	window.location.assign("deletepost.php?id=" + id);
-						  }
-						}
-
-						function report(id)
-						{
-						var r=confirm("Are you sure you want to report this post?");
-						if (r==true)
-						  {
-						  	window.location.assign("report.php?id=" + id);
-						  }
-						}
-
-						function viewcomm(id)
-						{
-						  	window.location.assign("commentspage.php?id=" + id);
-						}
-					</script>
 					
 					<!--End of Wells -->
 
-				<div class="col-sm-3">
-							<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ftodayscarolinian%2F%3Ffref%3Dts&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="250" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-							<iframe class="marg" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fwarriorsturf%2F%3Ffref%3Dts&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="300" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-				</div>
+				
 			</div>
 		</div>
 		<!--END OF CONTENT-->
@@ -281,7 +225,7 @@
 
 					</div>
 					<div class="modal-footer">
-						<form action="" method="POST" class="form-inline">
+						<form action="comment.php" method="POST" class="form-inline">
 							<input type="text" name="comm" class="pull-left" placeholder="Write a comment..." style="width:80%;padding:5px;">
 							<button type="Submit" class="btn btn-success">Comment</button>
 						</form>

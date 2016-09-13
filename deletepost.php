@@ -7,6 +7,7 @@
 		mysql_select_db("webapp") or die("Cannot connect to database"); //Connect to database
 		$id = $_GET['id'];
 		mysql_query("DELETE FROM posts WHERE postid='$id'");
+		mysql_query("DELETE FROM comments WHERE postid='$id'");
 		header("location: userPagev2.php");
 	}
 ?>
