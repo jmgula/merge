@@ -121,11 +121,44 @@
     					</div>
 					</div>
 				</div>
-			
+
 				<div class="col-sm-6" id="viewComments" role="dialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<div class="modal-header"><h4><b>View Comments</b></h4></div>
+
+				<?php
+
+						mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
+						mysql_select_db("webapp") or die("Cannot connect to database");
+						$query = mysql_query("Select * from posts WHERE postid='$postid'");
+
+
+						while ($row = mysql_fetch_assoc($query)) {
+							$tablepost = $row['submittext'];
+							$tablename = $row['sender'];
+							$tablepic = $row['senderpic'];
+							$timestamp = $row['hrs'];
+							$tablepostid = $row['userpostid'];
+
+													
+								Print ' 
+									<div class="well">
+									<div class="media">
+										<a class="pull-left" href="#"><img class="media-object" src="resource/images/'; Print $tablepic; Print '"></a>
+										<div class="media-body">
+											<a href="#"><strong>'; Print $tablename; Print '</strong></a><span class="time">'; echo " ";echo date('m/d/Y', strtotime($timestamp));  Print '</span><br>';
+											echo nl2br($tablepost);
+										Print '
+										</div>
+										
+									</div>
+									</div>
+								';
+							}
+					?>
+			
+							<div class="modal-header"><h4><b>View Comments</b></h4>
+							</div>
 							<div class="modal-body">
 								<?php
 									mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
@@ -162,8 +195,9 @@
 							</div>
 							<div class="modal-footer">
 								<form action="comment.php" method="POST" class="form-inline">
-									<input type="text" name="comm" class="pull-left" required="required" placeholder="Write a comment..." style="width:80%;padding:5px;">
+									<input type="text" name="comm" class="pull-left" required="required" placeholder="Write a comment..." style="width:70%;padding:5px;">
 									<button type="Submit" class="btn btn-success">Comment</button>
+									<a href="userPagev2.php"><button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button></a>
 								</form>
 							</div>
 						</div>

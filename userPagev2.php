@@ -144,7 +144,6 @@
 						mysql_select_db("webapp") or die("Cannot connect to database");
 						$query = mysql_query("Select * from posts ORDER BY postid DESC");
 
-						$exists = mysql_num_rows($query);
 
 						while ($row = mysql_fetch_assoc($query)) {
 							$tablepost = $row['submittext'];
@@ -160,7 +159,7 @@
 										<a class="pull-left" href="#"><img class="media-object" src="resource/images/'; Print $tablepic; Print '"></a>
 										<div class="media-body">
 											<a href="#"><strong>'; Print $tablename; Print '</strong></a><span class="time">'; echo " ";echo date('m/d/Y', strtotime($timestamp));  Print '</span><br>';
-											Print $tablepost;
+											echo nl2br($tablepost);
 										Print '
 										</div>
 										<ul class="list-inline list-unstyled interact-sec">
@@ -182,7 +181,7 @@
 										<a class="pull-left" href="#"><img class="media-object" src="resource/images/'; Print $tablepic; Print '"></a>
 										<div class="media-body">
 											<a href="#"><strong>'; Print $tablename; Print '</strong></a><span class="time">'; echo " ";echo date('m/d/Y', strtotime($timestamp));  Print '</span><br>';
-											Print $tablepost;
+											echo nl2br($tablepost);
 										Print '
 										</div>
 										<ul class="list-inline list-unstyled interact-sec">
