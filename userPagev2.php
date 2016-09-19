@@ -120,6 +120,8 @@
 	    					</ul>
     					</div>
 					</div>
+					<iframe src="http://usc.edu.ph/" width="100%" height="400px" style="border:none;overflow:hidden;margin-top:10px;" scrolling="yes" frameborder="0" allowTransparency="true"></iframe>
+
 				</div>
 				<div class="col-sm-6">
 					<!--Status-->
